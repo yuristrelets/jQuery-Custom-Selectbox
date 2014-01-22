@@ -1,4 +1,4 @@
-Custom Selectbox
+Custom Selectbox (AngularJS fix)
 =======================
 
 SelectBox replacement using jQuery. Hides the selectbox and replaces it with an easy to style css version.  

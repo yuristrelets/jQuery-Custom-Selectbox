@@ -1,0 +1,73 @@
+<!doctype html>
+<html ng-app="example">
+    <head>
+        <title>Custom SelectBox</title>
+        <link rel="stylesheet" href="css/jquery.jscrollpane.css" />
+        <link rel="stylesheet" href="css/customSelectBox.css" />
+        <!-- example.css is throwaway code for demoing -->
+        <link rel="stylesheet" href="css/example.css" />
+    </head>
+
+    <body class="noJS" id="example-1" ng-controller="ExampleController">
+        <script>
+            var bodyTag = document.getElementsByTagName("body")[0];
+                bodyTag.className = bodyTag.className.replace("noJS", "hasJS");
+        </script>
+
+        <h1>Custom SelectBox (AngularJS example)</h1>
+
+        <h2>Basic Select</h2>
+        <select sb-select sb-width="300"
+                name="option-select"
+                class="custom"
+                ng-model="country"
+                ng-options="country for country in countries"
+                ng-change="onChange()">
+        </select>
+
+        <br>
+
+        <select sb-select name="option-select"
+                class="custom"
+                ng-model="city"
+                ng-options="city for city in cities">
+        </select>
+
+        <br><br><br>
+
+        <pre>{{ country }}<br>{{ city }}</pre>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
+        <script src="js/angular-selectbox.js"></script>
+        <script src="js/jScrollPane.js"></script>
+        <script src="js/jquery.mousewheel.js"></script>
+        <script src="js/SelectBox.js"></script>
+
+        <script>
+            var example = angular.module('example', ['sbSelectBox']);
+
+            example.controller('ExampleController', function($scope) {
+
+                var cities = {
+                    "United States": ["New York", "Austin", "Los Angeles", "Jersey City"],
+                    "Italy": ["Rome", "Palermo", "Venice", "Florence"],
+                    "France": ["Paris", "Cognac"],
+                    "Germany": ["Berlin", "Rotterdam", "Dresden"],
+                    "Ukraine": ['Kiev', 'Kharkov', 'Sevastopol']
+                }
+
+                $scope.country = 'Ukraine';
+                $scope.countries = ['Italy', 'France', 'Germany', 'Ukraine', 'United States'];
+
+                $scope.onChange = function() {
+                    $scope.cities = cities[$scope.country];
+                    $scope.city = $scope.cities[0];
+                }
+
+                $scope.onChange();
+
+            });
+        </script>
+    </body>
+</html>
